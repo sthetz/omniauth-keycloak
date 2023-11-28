@@ -1,6 +1,6 @@
 require 'omniauth'
 require 'omniauth-oauth2'
-require 'json/jwt'
+require 'jwt'
 require 'uri'
 
 module OmniAuth
@@ -123,8 +123,8 @@ module OmniAuth
 
             def raw_info
                 id_token_string = access_token.token
-                jwks = JSON::JWK::Set.new(@certs)
-                id_token = JSON::JWT.decode id_token_string, jwks
+                jwks = JWT::JWK::Set.new(@certs)
+                id_token = JWT.decode id_token_string, jwks
                 id_token
             end
 
